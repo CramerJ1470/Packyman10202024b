@@ -18,7 +18,7 @@ const userSchema = new Schema({
 		require: true,
 	},
 
-	savedPlayingboards: [{ type: ObjectId, required: false}],
+	savedPlayingboards: [{ type: ObjectId, ref: "Playingboards",required: false}],
 	games: {type:ObjectId ,require:false},
 });
 
