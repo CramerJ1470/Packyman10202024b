@@ -1,0 +1,47 @@
+#write user data to add json data of [{"_id":"6421bdc3edf51cea27e24c32","rows":[[{"blockName":"CornBord","properties":{"a":"closed","b":"closed","c":"closed","d":"closed"},"type":"cornbord","yCenter":-3.5,"xCenter":-3.5,"x":0}] to an aws ec2 instance through amazon webservices
+
+
+
+var AWS = require('aws-sdk');
+
+// Configure AWS
+AWS.config.update({
+    accessKeyId: 'YOUR_AWS_ACCESS_KEY',
+    secretAccessKey: 'YOUR_AWS_SECRET_ACCESS_KEY'
+});
+
+// Create an EC2 instance
+var ec2 = new AWS.EC2({apiVersion: '2016-11-15'});
+
+// Create JSON data
+var data = {
+    "_id": "6421bdc3edf51cea27e24c32",
+    "rows": [[{
+        "blockName": "CornBord",
+        "properties": {
+            "a": "closed",
+            "b": "closed",
+            "c": "closed",
+            "d": "closed"
+        },
+        "type": "cornbord",
+        "yCenter": -3.5,
+        "xCenter": -3.5,
+        "x": 0
+    }]]
+};
+
+// Add data to EC2 instance
+ec2.createTags({
+  Resources: ['YOUR
+_EC2_INSTANCE_ID'],
+  Tags: [
+    {
+      Key: 'data',
+      Value: JSON.stringify(data)
+    }
+  ]
+}, function(err, data) {
+  if (err) console.log(err, err.stack); // an error occurred
+  else     console.log(data);           // successful response
+});
