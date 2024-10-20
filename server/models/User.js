@@ -18,8 +18,8 @@ const userSchema = new Schema({
 		require: true,
 	},
 
-	savedPlayingboards: [{ type: Array, required: false}],
-	games: {type:Array,require:false},
+	savedPlayingboards: [{ type: ObjectId, required: false}],
+	games: {type:ObjectId ,require:false},
 });
 
 userSchema.methods = {
