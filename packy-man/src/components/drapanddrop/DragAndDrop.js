@@ -13,17 +13,17 @@ import { saveboardHandler } from "../../services";
 import AuthContext from "../../context/AuthContext";
 import ListOfBlocksContext from "../../context/ListOfBlocksContext";
 import PickedBlocksToChangeContext from "../../context/PickedBlocksToChangeContext";
-import BuildRowsContext from "../../context/BuildRowsContext";
+import PlayingboardsContext from "../../context/PlayingboardsContext";
 
 const border1 = true;
 const loggedindiv = require("../RegisterOrStart").loggedindiv;
 localStorage.setItem("pickedBlockIndex", "");
 
-const DragAndDrop = ({ isAuth, listOfBlock, buildRows }) => {
+const DragAndDrop = ({ isAuth, listOfBlock, buildRows,boards }) => {
 	const isit = { isAuth };
 	console.log(`isit: `, isit);
 
-	// const { setBuildRows, buildRows } = useContext(BuildRowsContext);
+	 
 	const navigate = useNavigate();
 	class Block {
 		constructor(block, x) {

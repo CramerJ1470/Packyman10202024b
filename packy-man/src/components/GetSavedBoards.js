@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import SavedBoards from "./SavedBoards";
 import { useNavigate } from "react-router-dom";
-function GetSavedBoards({ isAuth, boards }) {
+import AuthContext from "../context/AuthContext";
+import BoardsContext from "../context/BoardsContext";
+
+const GetSavedBoards = () => {
+	const { setIsAuth, isAuth } = useContext(AuthContext);
+	const { setBoards, boards } = useContext(BoardsContext);
+// function GetSavedBoards({ isAuth, boards }) {
 	
 
 	const navigate = useNavigate();

@@ -174,6 +174,7 @@ function App() {
 													listOfBlocks={listOfBlocks}
 													buildRows={buildRows}
 													listitems = {listItems1}
+													boards={boards}
 												
 												/>
 											}
