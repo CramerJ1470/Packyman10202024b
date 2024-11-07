@@ -70,10 +70,21 @@ export const getUser = async (userId) => {
 /************Playingboards  Section ***************** */
 export const getSavedBoards = async (applyFunc) => {
 	const url = "http://localhost:8090/api/playingboards";
+
+	try {
+		
 	const res = await fetch(url);
-	res.json().then((playingboards) => {
+	await res.json().then((playingboards) => {
 		applyFunc([...playingboards]);
 	});
+}
+	catch (error) {
+		throw new Error(
+			`Error fetching and posting playingboard: ${error.message}`
+		);
+	}
+
+	
 	
 };
 export function saveboardHandler(rows, userId) {
@@ -146,6 +157,7 @@ export const addPlayingboard = async (rows, userId) => {
 			`Error fetching and posting playingboard: ${error.message}`
 		);
 	}
+	
 
 	/**** add playingboard._id to users savedPlayingBoards */
 };

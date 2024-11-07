@@ -2,10 +2,7 @@ import React from "react";
 import "../index.css";
 import { pickRandomBlock, createStroops } from "../checkBlocks/pickRandomBlock";
 import Row from "./Row";
-import { useRef, useEffect, useState, useContext } from "react";
-import RightSide from "./RightSide";
 import { useNavigate } from "react-router-dom";
-import Theme from "./Theme";
 import Play from "./Play";
 
 const GuestPlayingBoard = () => {

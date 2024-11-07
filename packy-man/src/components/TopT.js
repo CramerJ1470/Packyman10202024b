@@ -5,6 +5,7 @@ import FullBottom from "./FullBottom";
 import StroopWafels from "./StroopWafels";
 
 const TopT = () => {
+	
 	return (
 		<>
 			<div>
@@ -16,6 +17,7 @@ const TopT = () => {
 			</div>
 		</>
 	);
+	
 };
 
 export default TopT;

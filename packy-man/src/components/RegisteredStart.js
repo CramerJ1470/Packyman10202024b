@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import AuthContext from "../context/AuthContext";
+import React from "react";
+import { useNavigate} from "react-router-dom";
+
 import { logout } from "../services";
 
-function RegisteredStart(isAuth) {
+function RegisteredStart({isAuth, boards}) {
 	const navigate = useNavigate();
 	if (!isAuth) {
 		navigate("/");
@@ -23,18 +23,6 @@ function RegisteredStart(isAuth) {
 
 	function loggedout() {
 		navigate("/home");
-	}
-
-	function showRegister() {
-		document.getElementById("register").style.display = "";
-	}
-
-	function showLogin() {
-		document.getElementById("login1").style.display = "";
-	}
-
-	function showGuest() {
-		document.getElementById("guest").style.display = "";
 	}
 
 	const playrandomBoard = (e) => {
@@ -61,6 +49,9 @@ function RegisteredStart(isAuth) {
 				</button>
 			</div>
 			<div id="savedboards">
+			{/* <Link to = "saveboards" path="../savedborards" isAuth= {isAuth} boards={boards}> 
+			Play a Saved Game Board
+				</Link> */}
 				<button className="btn" key={userId} onClick={savedboardsview}>
 					Play a Saved Game Board
 				</button>

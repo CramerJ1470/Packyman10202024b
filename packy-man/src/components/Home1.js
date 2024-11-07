@@ -5,7 +5,9 @@ import PageTitle from "./PageTitle";
 import PacOpen from "./PacOpen";
 import { useNavigate } from "react-router-dom";
 
-function Home1(isAuth) {
+function Home1({isAuth,boards}) {
+
+
     const navigate = useNavigate();
     // if(!isAuth) {
     //     alert("Please Login");
@@ -17,7 +19,7 @@ function Home1(isAuth) {
 				<div className="landing"></div>
 			</div>
 
-			<RegisteredStart />
+			<RegisteredStart isAuth={isAuth} boards={boards}/>
 			<PageTitle />
 			<PacOpen />
 		</>

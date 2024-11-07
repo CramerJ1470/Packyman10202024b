@@ -1,5 +1,4 @@
 import React from "react";
-import RightSide from "./RightSide";
 import RegisterOrStart from "./RegisterOrStart";
 import PageTitle from "./PageTitle";
 import PacOpen from "./PacOpen";

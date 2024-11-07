@@ -5,23 +5,14 @@
 // Challenge to fix next== while the first comment is true, the larger problem is that you're trying to return JSX from an async method which won't work. you need to fetch your async data in componentDidMount() and call this.setState when your api returns instead of returning JSX directly –
 
 import React from "react";
-
-import { useParams } from "react-router-dom";
-import Board from "./Board";
 import "../index.css";
-import { pickRandomBlock, createStroops } from "../checkBlocks/pickRandomBlock";
 import Row from "./Row";
-import { useRef, useEffect, useState, useContext } from "react";
-import RightSide from "./RightSide";
-import AuthContext from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import Theme from "./Theme";
-import Play from "./Play";
 import makeIntoBlocks from "../checkBlocks/makeIntoBlocks";
 
-export const SavedBoards = ({ board, index }) => {
-	const { setIsAuth, isAuth } = useContext(AuthContext);
-	setIsAuth(true);
+export const SavedBoards = ({ isAuth,board, index }) => {
+	
+
 	const navigate = useNavigate();
 	// const { token, username, id } = JSON.parse(
 	// 	localStorage.getItem("userData")
@@ -40,24 +31,6 @@ export const SavedBoards = ({ board, index }) => {
 
 	// //localStorage.setItem("rows", rows);
 
-	function endgameHandler(rows, userId) {
-		const egos = document.getElementsByClassName("egos");
-		for (let x = 0; x < egos.length; x++) {
-			egos[x].classList.add("egodisplay");
-			egos[x].classList.remove("ego");
-		}
-		document.getElementById("endgame").classList.add("ego");
-		document.getElementById("directions").classList.add("egolist");
-	}
-	function closegameHandler(rows, userId) {
-		console.log("close game happening");
-	}
-	function savegameHandler(rows, userId) {
-		console.log("save game happening");
-	}
-	function backtohomeHandler(userId) {
-		console.log(`home1`);
-	}
 
 	const getBoard = function (e) {
 		const _id = e.target.innerText;

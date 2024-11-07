@@ -1,5 +1,7 @@
 import React from "react";
 import "../index.css";
+import TopOpen from "./TopOpen";
+import FullBottom from "./FullBottom";
 import BotOpen from "./BotOpen";
 import StroopWafels from "./StroopWafels";
 
@@ -14,6 +16,8 @@ const BotT = () => {
 			</div>
 		</>
 	);
+
+
 };
 
 export default BotT;

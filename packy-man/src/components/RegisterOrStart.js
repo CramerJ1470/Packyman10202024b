@@ -1,10 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext} from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
-import BoardsContext from "../context/BoardsContext";
+
 import useInput from "../hooks/useInput";
-import { login, register, logout, getSavedBoards } from "../services";
-import PlayingBoard from "./PlayingBoard";
+import { login, register, logout} from "../services";
 
 const RegisterOrStart = () => {
 	const navigate = useNavigate();

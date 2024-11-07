@@ -4,7 +4,7 @@ import RegisterOrStart from "./RegisterOrStart";
 import PageTitle from "./PageTitle";
 import PacOpen from "./PacOpen";
 
-function Home({isAuth}) {
+function Home(isAuth) {
 	return (
 		<>
 			<div>

@@ -1,6 +1,5 @@
 import React from "react";
 import "../index.css";
-import RightDE from "./RightDE";
 import StroopWafels from "./StroopWafels";
 
 const TopDE = () => {

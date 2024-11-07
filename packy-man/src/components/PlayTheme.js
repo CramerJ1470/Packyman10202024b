@@ -1,11 +1,10 @@
-import React, { Component } from "react";
-const pacmanBeginning = require("../assets/pacman_beginning.wav");
+import React from "react";
 
 const PlayTheme = () => {
-	function playtheme() {
-		const audioEl = document.getElementById("audiotheme");
-		audioEl.play();
-	}
+	// function playtheme() {
+	// 	const audioEl = document.getElementById("audiotheme");
+	// 	audioEl.play();
+	// }
 	// window.onload = (function () {
 	// 	playtheme();
 	// })();

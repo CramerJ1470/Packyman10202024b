@@ -1,6 +1,5 @@
 import React from "react";
 import "../index.css";
-import StroopWafels from "./StroopWafels";
 
 const Empty = () => {
 	return (

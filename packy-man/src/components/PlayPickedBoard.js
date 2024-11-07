@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import makeIntoBlocks from "../checkBlocks/makeIntoBlocks";
 import Row from "./Row";
 import Play from "./Play";
-import ScoreContext from "../context/ScoreContext";
+
 import { createStroops } from "../checkBlocks/pickRandomBlock";
 
 const PlayPickedBoard = ({ isAuth, boards }) => {
@@ -22,15 +22,6 @@ const PlayPickedBoard = ({ isAuth, boards }) => {
 		}
 		document.getElementById("endgame").classList.add("ego");
 		document.getElementById("directions").classList.add("egolist");
-	}
-	function closegameHandler(rows, userId) {
-		console.log("close game happening");
-	}
-	function savegameHandler(rows, userId) {
-		console.log("save game happening");
-	}
-	function backhomeHandler(userId) {
-		console.log(`home1`);
 	}
 
 	const rows2 = pickedBoard.rows;
@@ -167,12 +158,7 @@ const PlayPickedBoard = ({ isAuth, boards }) => {
 	});
 
 	/**************score keeping**************/
-	function add10ToCount(count) {
-		count += 10;
-		return count;
-	}
 
-	let score = document.getElementById("score");
 
 	let pickedBoardRows = pickedBoard.rows;
 	console.log(`pickedBoardRows:`, pickedBoardRows);

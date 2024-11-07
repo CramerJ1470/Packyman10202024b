@@ -1,6 +1,5 @@
 import React from "react";
 import "../index.css";
-import Wafel from "./Wafel";
 import { createStroopWafels } from "../checkBlocks/pickRandomBlock";
 
 const StroopWafels = (block) => {

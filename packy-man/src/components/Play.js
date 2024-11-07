@@ -1,12 +1,9 @@
 import React from "react";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect} from "react";
 import PlayTheme from "./PlayTheme";
 import checkStroopWafels from "../checkBlocks/checkStroopWafels";
-import PowerPills from "./PowerPills";
 
 function Play({ columnsToKeep, rowsToKeep,stroops }) {
-	const ref = useRef();
-
 
 	const Newgame = () => {
 		let disableUp = true;
@@ -295,10 +292,7 @@ function Play({ columnsToKeep, rowsToKeep,stroops }) {
 		useKey("Numpad2", handleDown);
 	};
 	/**************score keeping**************/
-	function add10ToCount(count) {
-		count += 10;
-		return count;
-	}
+
 
 
 	Newgame();

@@ -1,244 +1,27 @@
 // https://github.com/CramerJ1470/packy-man.git
-import React, { useState, useContext } from "react";
-
-import { pickBlocksToChange } from "../../checkBlocks/pickRandomBlock";
-
+import React, { useState} from "react";
 import Row from "../Row";
-
 import { useNavigate } from "react-router-dom";
-import Theme from "../Theme";
 import Play from "../Play";
 import PickedBlockList from "./PickedBlockList";
-import { saveboardHandler } from "../../services";
-import AuthContext from "../../context/AuthContext";
-import ListOfBlocksContext from "../../context/ListOfBlocksContext";
-import PickedBlocksToChangeContext from "../../context/PickedBlocksToChangeContext";
-import PlayingboardsContext from "../../context/PlayingboardsContext";
+import { addPlayingboard } from "../../services";
+import Block from "../../scripts/Block";
+const   {addBinArrays } = require("../../scripts/pickMatrix");
 
-const border1 = true;
-const loggedindiv = require("../RegisterOrStart").loggedindiv;
 localStorage.setItem("pickedBlockIndex", "");
 
 const DragAndDrop = ({ isAuth, listOfBlock, buildRows,boards }) => {
-	const isit = { isAuth };
-	console.log(`isit: `, isit);
 
-	 
-	const navigate = useNavigate();
-	class Block {
-		constructor(block, x) {
-			this.blockName = block;
-			this.properties = (() => {
-				let type = block.toLowerCase();
-				let properties;
-				switch (type) {
-					case "bott":
-						properties = {
-							a: "open",
-							b: "closed",
-							c: "open",
-							d: "open",
-						};
-						break;
-					case "ltc":
-						properties = {
-							a: "closed",
-							b: "closed",
-							c: "open",
-							d: "open",
-						};
-						break;
-					case "fw":
-						properties = {
-							a: "open",
-							b: "open",
-							c: "open",
-							d: "open",
-						};
-						break;
-					case "lbc":
-						properties = {
-							a: "closed",
-							b: "open",
-							c: "open",
-							d: "closed",
-						};
-						break;
-					case "blocksv":
-						properties = {
-							a: "closed",
-							b: "open",
-							c: "closed",
-							d: "open",
-						};
-						break;
-					case "blocksh":
-						properties = {
-							a: "open",
-							b: "closed",
-							c: "open",
-							d: "closed",
-						};
-						break;
-					case "empty":
-						properties = {
-							a: "closed",
-							b: "closed",
-							c: "closed",
-							d: "closed",
-						};
-						break;
-					case "rbc":
-						properties = {
-							a: "open",
-							b: "open",
-							c: "closed",
-							d: "closed",
-						};
-						break;
-					case "rtc":
-						properties = {
-							a: "open",
-							b: "closed",
-							c: "closed",
-							d: "open",
-						};
-						break;
-					case "topt":
-						properties = {
-							a: "open",
-							b: "open",
-							c: "open",
-							d: "closed",
-						};
-						break;
-					case "leftt":
-						properties = {
-							a: "closed",
-							b: "open",
-							c: "open",
-							d: "open",
-						};
-						break;
-					case "rightt":
-						properties = {
-							a: "open",
-							b: "open",
-							c: "closed",
-							d: "open",
-						};
-						break;
-					case "topde":
-						properties = {
-							a: "closed",
-							b: "open",
-							c: "closed",
-							d: "closed",
-						};
-						break;
-					case "rightde":
-						properties = {
-							a: "open",
-							b: "closed",
-							c: "closed",
-							d: "closed",
-						};
-						break;
-					case "bottde":
-						properties = {
-							a: "closed",
-							b: "closed",
-							c: "closed",
-							d: "open",
-						};
-						break;
-					case "leftde":
-						properties = {
-							a: "closed",
-							b: "closed",
-							c: "open",
-							d: "closed",
-						};
-						break;
-					case "horizbord":
-						properties = {
-							a: "closed",
-							b: "closed",
-							c: "closed",
-							d: "closed",
-						};
-						break;
-					case "vertbord":
-						properties = {
-							a: "closed",
-							b: "closed",
-							c: "closed",
-							d: "closed",
-						};
-						break;
-					case "cornbord":
-						properties = {
-							a: "closed",
-							b: "closed",
-							c: "closed",
-							d: "closed",
-						};
-						break;
-					case "unchosen":
-						properties = {
-							a: "both",
-							b: "both",
-							c: "both",
-							d: "both",
-						};
-						break;
+	
+	const [buildBlockList, setBuildBlockList] = useState([]);
 
-					default:
-						console.log(`Not block found`);
-				}
-				return properties;
-			})();
-			this.type = this.blockName.toLowerCase();
-			this.yCenter = -3.5 + Math.floor(x / 11) * 10;
-			this.xCenter = -3.5 + (x % 11) * 10;
-			this.x = x;
-		}
-	}
-	const blockList = [
-		{ ltc: new Block("LTC") },
-		{ fw: new Block("FW") },
-		{ lbc: new Block("LBC") },
-		{ blocksh: new Block("BlockSH") },
-		{ blocksv: new Block("BlockSV") },
-		{ rbc: new Block("RBC") },
-		{ rtc: new Block("RTC") },
-		{ topt: new Block("TopT") },
-		{ rightt: new Block("RightT") },
-		{ bott: new Block("BotT") },
-		{ topde: new Block("TopDE") },
-		{ bottde: new Block("BottDE") },
-		{ rightde: new Block("RightDE") },
-		{ leftde: new Block("LeftDE") },
-		{ empty: new Block("Empty") },
-		{ unchosen: new Block("Unchosen") },
-	];
+	
+	// useEffect(() => {
+		
+	// }, []);
+
+	function buildUnchosen() {
 	let blocks = [];
-	const blocks1 = [
-		"BotT",
-		"LTC",
-		"FW",
-		"LBC",
-		"BlockSV",
-		"BlockSH",
-		"RBC",
-		"RTC",
-		"TopT",
-		"LeftT",
-		"RightT",
-		"Empty",
-		"Unchosen",
-	];
-	let fullList = [];
 	let newBlock;
 	for (let x = 0; x < 77; x++) {
 		if (x === 0 || x === 10 || x === 66 || x === 76) {
@@ -259,10 +42,18 @@ const DragAndDrop = ({ isAuth, listOfBlock, buildRows,boards }) => {
 
 		blocks.push(newBlock);
 	}
+return blocks;
+}
+const [blocks, setBlocks] = useState(buildUnchosen, []);
+console.log("start of blocks: ",blocks);
 
-	//const border1 = true;
 
-	//console.log(`random board blocks: `, blocks);
+
+	
+	const isit = { isAuth };
+	console.log(`isit: `, isit);
+	const navigate = useNavigate();
+
 	let rows = [];
 	let newRow1 = [];
 	for (let u = 0; u < blocks.length; u++) {
@@ -283,7 +74,6 @@ const DragAndDrop = ({ isAuth, listOfBlock, buildRows,boards }) => {
 		}
 	}
 
-	let newColumn = [];
 	let columnsToKeep = [];
 	let colStart;
 	let colEnd;
@@ -323,7 +113,6 @@ const DragAndDrop = ({ isAuth, listOfBlock, buildRows,boards }) => {
 	// *****************on a given Y the start-end of each row path  **********************
 
 	let rowsToKeep = [];
-	let allRows = [];
 	for (let xx = 1; xx < rows.length - 1; xx++) {
 		let row = rows[xx];
 		let newRow = [];
@@ -398,56 +187,42 @@ const DragAndDrop = ({ isAuth, listOfBlock, buildRows,boards }) => {
 	const { username, id } = JSON.parse(localStorage.getItem("userData"));
 	const userId = id;
 
-	function endgameHandler(rows, userId) {
-		const egos = document.getElementsByClassName("egos");
-		//console.log(egos);
-		for (let x = 0; x < egos.length; x++) {
-			egos[x].classList.add("egodisplay");
-			egos[x].classList.remove("ego");
-		}
-		document.getElementById("endgame").classList.add("ego");
-		document.getElementById("directions").classList.add("egolist");
-	}
-	function closegameHandler(rows, userId) {
-		//console.log("close game happening");
-	}
 	function savebuiltgameHandler() {
 		let arrayOfBlocks = document.getElementsByClassName("block");
 		let arrayToSave = Array.from(arrayOfBlocks).slice(0, 77);
 
 		alert("save game happening");
-		console.log(`arrayOfBlocks: `, arrayToSave);
+		// console.log(`arrayOfBlocks: `, arrayToSave);
 		let newRows = [];
 		let row = [];
 		for (let x = 0; x < arrayToSave.length; x++) {
-			console.log(arrayToSave[x].getAttribute("name"));
-
-			console.log(x);
+			// console.log(arrayToSave[x].getAttribute("name"));
+			let block = arrayToSave[x].getAttribute("name");
+			if (block === "Unchosen") {block = "Empty";}
+			// console.log(x);
 			if ((x + 1) % 11 === 0) {
-				console.log(x);
-				let block = arrayToSave[x].getAttribute("name");
+				// console.log(x);
 				let newBlock = new Block(block, x);
-				console.log(newBlock);
+				// console.log(newBlock);
 				row.push(newBlock);
 				newRows.push(row);
 				row = [];
 			} else if ((x + 1) % 11 !== 0) {
-				let block = arrayToSave[x].getAttribute("name");
-				console.log(block);
+				// console.log(block);
 				let newBlock = new Block(block, x);
 				row.push(newBlock);
 			}
 		}
-		console.log(newRows);
+		// console.log(newRows);
 		let userId = JSON.parse(localStorage.userData).id;
 
-		saveboardHandler(newRows, userId);
+		addPlayingboard(newRows, userId);
+		
 	}
 	function backtohomeHandler(userId) {
 		navigate("/home1");
 	}
 	let stroops = [];
-	let listitems = [];
 	let pickedBlockName;
 	let pickedBlockId;
 	let pickedMatrix;
@@ -463,7 +238,7 @@ const DragAndDrop = ({ isAuth, listOfBlock, buildRows,boards }) => {
 			return;
 		} else {
 			let allitems = document.getElementsByClassName("changecolor");
-			console.log(allitems);
+			// console.log(allitems);
 			for (let aitem of allitems) {
 				// console.log(aitem.classList);
 				aitem.classList.remove("changecolor");
@@ -472,9 +247,7 @@ const DragAndDrop = ({ isAuth, listOfBlock, buildRows,boards }) => {
 			pickedBlockName = e.target.getAttribute("name");
 
 			pickedBlockId = e.target.parentNode.getAttribute("id");
-			let newListBlocks1 = document.getElementsByClassName("orig");
-			let newList1 = Array.from(newListBlocks1);
-			console.log(`pickedBlockId:`, pickedBlockId);
+			// console.log(`pickedBlockId:`, pickedBlockId);
 			if (
 				noChangeBlocks.includes(pickedBlockName) ||
 				Number(localStorage.getItem("pickedBlockIndex") === 38)
@@ -503,10 +276,15 @@ const DragAndDrop = ({ isAuth, listOfBlock, buildRows,boards }) => {
 				localStorage.setItem("pickedBlockIndex", Number(pickedBlockId));
 
 				console.log(`picked block:`, e.target);
+				let blockaName = e.target.getAttribute("name");
+				let blockaIndex = e.target.parentNode.getAttribute("id");
+				console.log("blockaIndex:",blockaIndex);
+				const blocka = new Block(blockaName,blockaIndex);
+				console.log("blocka: ",blocka);
 				let listitems = getListItems(pickedMatrix);
 				localStorage.setItem("listitems", [listitems]);
-				console.log(`dad listitems:`, listitems);
-				console.log(`lsitems:`, localStorage.getItem("listitems"));
+				// console.log(`dad listitems:`, listitems);
+				// console.log(`lsitems:`, localStorage.getItem("listitems"));
 				// let list = pickBlocksToChange(
 				// 	pickedBlockId,
 				// 	newList1,
@@ -519,13 +297,13 @@ const DragAndDrop = ({ isAuth, listOfBlock, buildRows,boards }) => {
 
 	function getListItems(pickedMatrix) {
 		let listArray = [];
-		console.log(Number(localStorage.getItem("pickedBlockId")));
-		console.log(
-			document.getElementsByClassName("block")[
-				Number(localStorage.getItem("pickedBlockIndex"))
-			]
-		);
-		console.log(`pickedMatrix:`, pickedMatrix);
+		// console.log(Number(localStorage.getItem("pickedBlockId")));
+		// console.log(
+		// 	document.getElementsByClassName("block")[
+		// 		Number(localStorage.getItem("pickedBlockIndex"))
+		// 	]
+		// );
+		// console.log(`pickedMatrix:`, pickedMatrix);
 		const listToCheck = [
 			new Block("FW"),
 			new Block("TopDE"),
@@ -546,23 +324,20 @@ const DragAndDrop = ({ isAuth, listOfBlock, buildRows,boards }) => {
 		];
 		for (let i = 0; i < listToCheck.length; i++) {
 			let count = 0;
-			console.log(i, `block:`, listToCheck[i]);
-			console.log(i, `block:`, listToCheck[i].properties);
+			// console.log(i, `block:`, listToCheck[i]);
+			// console.log(i, `block:`, listToCheck[i].properties);
 			if (
 				pickedMatrix.a === "both" ||
 				pickedMatrix.a === listToCheck[i].properties.a
 			) {
 				count++;
-				console.log(`match:`, i, count);
-			} else {
-				count = 0;
 			}
 			if (
 				pickedMatrix.b === listToCheck[i].properties.b ||
 				pickedMatrix.b === "both"
 			) {
 				count++;
-				console.log(`match:`, i, count);
+				// console.log(`match:`, i, count);
 			} else {
 				count = 0;
 			}
@@ -571,7 +346,7 @@ const DragAndDrop = ({ isAuth, listOfBlock, buildRows,boards }) => {
 				pickedMatrix.c === "both"
 			) {
 				count++;
-				console.log(`match:`, i, count);
+				// console.log(`match:`, i, count);
 			} else {
 				count = 0;
 			}
@@ -580,7 +355,7 @@ const DragAndDrop = ({ isAuth, listOfBlock, buildRows,boards }) => {
 				pickedMatrix.d === "both"
 			) {
 				count++;
-				console.log(`match:`, i, count);
+				// console.log(`match:`, i, count);
 				if (count === 4) {
 					listArray.push(listToCheck[i].blockName);
 					count = 0;
@@ -592,13 +367,13 @@ const DragAndDrop = ({ isAuth, listOfBlock, buildRows,boards }) => {
 		return listArray;
 	}
 	function getMatrix(x) {
-		console.log(`getMatrix: `, x);
+		// console.log(`getMatrix: `, x);
 		x = Number(x);
 		let aBlock = blocks[Number(x) - 1].properties.c;
 		let bBlock = blocks[Number(x) - 11].properties.d;
 		let cBlock = blocks[Number(x) + 1].properties.a;
 		let dBlock = blocks[Number(x) + 11].properties.b;
-		console.log(`getMatrix: `, aBlock, bBlock, cBlock, dBlock);
+		// console.log(`getMatrix: `, aBlock, bBlock, cBlock, dBlock);
 		let getMatrixAns = { a: aBlock, b: bBlock, c: cBlock, d: dBlock };
 		return getMatrixAns;
 	}
@@ -624,7 +399,7 @@ const DragAndDrop = ({ isAuth, listOfBlock, buildRows,boards }) => {
 
 	function refreshPage(e) {
 		const bool = false;
-		console.log(bool);
+		// console.log(bool);
 		setRefresh(false);
 	}
 
@@ -634,7 +409,7 @@ const DragAndDrop = ({ isAuth, listOfBlock, buildRows,boards }) => {
 		<>
 			{/* <div id="packy" className="packy openmouth"></div> */}
 			{rows.map((row, index) => {
-				console.log(row);
+				// console.log(row);
 				return (
 					<Row
 						row={row}

@@ -74,27 +74,16 @@ const Eachone = ({ block, index, key, blockNum, borderOn }) => {
 	}
 	
 	let borderToggle = true;
-	// console.log(`borderToggle: `, borderToggle);
 	let code = { html: newComp }; //sets a variable to the component
-	// console.log(`blockNum: `, blockNum);
 	let codeHTML = newComp(); //sets a variable to running the Component;
-	// console.log(`each borderOn:`, borderOn);
+
 	// Render the component //
 	if (blockNum) {
 		id = Number(blockNum);
 	} else {
 		id = { index };
 	}
-	// function borderCheck(borderOn, id) {
-	// 	console.log("running borderCheck");
 
-	// let doc1 = document.querySelectorAll("11");
-	// console.log(doc1);
-	// 	// if (borderOn=== false) {
-	// 	// 	document.getElementById(id).classList.remove("brd");
-	// 	// }
-	// }
-	// borderCheck(borderOn, id);
 
 	return (
 		<>

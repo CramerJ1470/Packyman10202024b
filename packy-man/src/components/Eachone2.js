@@ -25,7 +25,6 @@ let newComp;
 const Eachone2 = ({ block, index }) => {
 	console.log(`blockNAme: `, block.blockName);
 	let comp = block.blockName; // blockName
-	let id;
 	if (comp === "RBC") {
 		//takes a string
 		newComp = RBC; //sets a variable to a component
@@ -66,25 +65,12 @@ const Eachone2 = ({ block, index }) => {
 	} else if (comp === "CornBord") {
 		newComp = CornBord;
 	}
-	// let borderToggle = borderOn;
-	// console.log(`borderToggle: `, borderToggle);
+
 	let code = { html: newComp }; //sets a variable to the component
-	// console.log(`blockNum: `, blockNum);
+
 	let codeHTML = code.html(); //sets a variable to running the Component;
-	// console.log(`each borderOn:`, borderOn);
-	// Render the component //
 
-	// function borderCheck(borderOn, id) {
-	// 	console.log("running borderCheck");
 
-	// let doc1 = document.querySelectorAll("11");
-	// console.log(doc1);
-	// 	// if (borderOn=== false) {
-	// 	// 	document.getElementById(id).classList.remove("brd");
-	// 	// }
-	// }
-	// borderCheck(borderOn, id);
-
-	return <div>{codeHTML}</div>;
+	return (<div>{codeHTML}</div>);
 };
 export default Eachone2;

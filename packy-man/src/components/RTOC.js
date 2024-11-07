@@ -1,6 +1,5 @@
 import React from "react";
 import "../index.css";
-import LTOC from './LTOC';
 
 const RTOC = () => {
 	return (

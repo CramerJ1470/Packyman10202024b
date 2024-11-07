@@ -5,13 +5,9 @@ import React from "react";
 import "../index.css";
 import { pickRandomBlock, createStroops } from "../checkBlocks/pickRandomBlock";
 import Row from "./Row";
-import { useRef, useEffect, useState, useContext } from "react";
-import RightSide from "./RightSide";
 import { useNavigate } from "react-router-dom";
-import Theme from "./Theme";
 import Play from "./Play";
-import { saveboardHandler } from "../services";
-import AuthContext from "../context/AuthContext";
+import { addPlayingboard } from "../services";
 const loggedindiv = require("./RegisterOrStart").loggedindiv;
 
 const PlayingBoard = (isAuth) => {
@@ -315,7 +311,7 @@ const PlayingBoard = (isAuth) => {
 								<button
 									className="btn"
 									onClick={(event) =>
-										saveboardHandler(rows, userId)
+											addPlayingboard(rows, userId)
 									}
 								>
 									Save Board
